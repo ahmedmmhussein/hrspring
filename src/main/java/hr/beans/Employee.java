@@ -15,6 +15,17 @@ public class Employee {
 	private String department;
 	private String email;
 
+	public Employee(String name2, String email2, String jobTitle2, Long salary2, String department2, int age,
+			Date dataofBirth) {
+		name=name2;
+		email=email2;
+		salary=salary2;
+		jobTitle=jobTitle2;
+		department=department2;
+		this.age=age;
+		this.dataofBirth=dataofBirth;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -13,7 +13,7 @@ import hr.config.RootConfig.WebPackage;
 
 @Configuration
 @Import(DataConfig.class)
-@ComponentScan(basePackages={"hr"}, 
+@ComponentScan(basePackages={"hr","hr.data"}, 
     excludeFilters={
         @Filter(type=FilterType.CUSTOM, value=WebPackage.class)
     })

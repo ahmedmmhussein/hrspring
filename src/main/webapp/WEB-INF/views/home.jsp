@@ -9,7 +9,7 @@
 <body>
 	<h1>Welcome to Hr</h1>
 
-	<a href="<c:url value="/spittles" />">View all Employees</a> |
-	<a href="<c:url value="/spitter/register" />">Register new Employee</a>
+	<a href="<c:url value="/employees" />">View all Employees</a> |
+	<a href="<c:url value="/employee/register" />">Register new Employee</a>
 </body>
 </html>

@@ -1,16 +1,14 @@
-create table Spittle (
-	id identity,
-	message varchar(140) not null,
-	created_at timestamp not null,
-	latitude double,
-	longitude double
+create table Employee(
+	id identity AUTO_INCREMENT,
+	name varchar(20) unique not null ,
+	jobTitle varchar(20) not null,
+	department varchar(30) not null,
+	email varchar(30) unique not null,
+	dataofBirth date not null,
+	salary long not null
 );
 
-create table Spitter (
+create table Department (
 	id identity,
-	username varchar(20) unique not null,
-	password varchar(20) not null,
-	first_name varchar(30) not null,
-	last_name varchar(30) not null,
-	email varchar(30) not null
+	name varchar(20) unique not null
 );

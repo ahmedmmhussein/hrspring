@@ -28,8 +28,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 
 	@Override
 	public List<Employee> findEmployees(long max, int count) {
-		// TODO Auto-generated method stub
-		return null;
+		return jdbc.query("select * from Employee", new EmployeeRowMapper());
 	}
 
 	@Override
@@ -43,27 +42,28 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 	public void addEmployee(Employee employee) {
 		jdbc.update(
 				"insert into Employee (name, jobTitle, department, email, dataofBirth, salary)"
-						+ " values (?, ?, ?, ?, ?)",
+						+ " values (?, ?, ?, ?, ?, ?)",
 				employee.getName(), employee.getJobTitle(), employee.getDepartment(), employee.getEmail(),
 				employee.getDataofBirth(), employee.getSalary());
 	}
 
 	@Override
-	public void updateEmployee(Employee employee, long id) {
-		// TODO Auto-generated method stub
-
+	public void updateEmployee(Employee employee) {
+		jdbc.update(
+				"UPDATE Employee SET name = ?, salary= ?, jobTitle=?, department=?, email=?, dataofBirth=?  WHERE id = ?",
+				employee.getName(), employee.getSalary(), employee.getJobTitle(), employee.getDepartment(),
+				employee.getEmail(), employee.getDataofBirth(), employee.getId());
 	}
 
 	@Override
 	public void deleteEmployee(long id) {
-		// TODO Auto-generated method stub
-
+		jdbc.update("DELETE FROM Employee WHERE id=?", id);
 	}
 
 	private static class EmployeeRowMapper implements RowMapper<Employee> {
 		public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
-			return new Employee(rs.getString("name"), rs.getString("email"), rs.getString("jobTitle"),
-					rs.getLong("salary"), rs.getString("department"), 0, rs.getDate("dataofBirth"));
+			return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("jobTitle"),
+					rs.getLong("salary"), rs.getString("department"), rs.getDate("dataofBirth"));
 
 		}
 	}

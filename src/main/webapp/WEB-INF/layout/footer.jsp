@@ -1,1 +1,1 @@
-Copyright &copy; Craig Walls
+<span style="background-color: #f2f2f2; text-align: center; margin: 10px">Copyright &copy; Ahmed Hussein </span>

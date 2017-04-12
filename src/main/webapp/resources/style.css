@@ -10,15 +10,15 @@ body {
 	list-style: none;
 	margin-left: 0px;
 	padding-left: 0px;
-} 
+}
 
 .spittleList ul li:first-child {
 	border-top: 0px;
-} 
+}
 
 .spittleList ul li {
 	border-top: 1px solid #cccccc;
-} 
+}
 
 .spittleTime {
 	font-size: 8pt;
@@ -33,21 +33,20 @@ body {
 }
 
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
 }
 
 td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+	text-align: left;
+	padding: 8px;
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+	background-color: #dddddd;
 }
 
 span.error {
-color: red;
+	color: red;
 }

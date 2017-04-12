@@ -4,63 +4,66 @@
     Author     : ahussein
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
-     <style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-</style>
-    <head>  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link rel="stylesheet" href="css/style.css">
-        <title>Employees Page</title>
-    </head>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="<c:url value="/resources/style.css" />">
+<title>Employees Page</title>
+</head>
 
 <body>
- <h2>Employees List</h2>
-  <a href="empservlet?action=create">Add new employee</a><br /><br />
-        
-        
-<c:choose>
-<c:when test="${employeeList.size()==0}">
-<i>There are no employees in the system.</i>
-</c:when>
-<c:otherwise>
-            <table align="center" cellpadding = "10">
-<tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Age</th>
-    <th>Salary</th>
-    <th>Job title</th>
-    <th>Department</th>
-    <th>Email</th>
-</tr>
-   <c:forEach items="${employeeList}" var="employee" >
-           <tr>
-    <td><c:out value="${employee.value.id}"/></td>
-    <td><c:out value="${employee.value.name}"/></td>
-    <td><c:out value="${employee.value.age}"/></td>
-    <td><c:out value="${employee.value.salary}"/></td>
-    <td><c:out value="${employee.value.jobTitle}"/></td>
-    <td><c:out value="${employee.value.department}"/></td>
-    <td><c:out value="${employee.value.email}"/></td>
-  </tr>
-        </c:forEach>
-            </table>
-</c:otherwise>
-</c:choose>
+	<h2>
+		<s:message code="employees.list" />
+	</h2>
+	<br />
+	<br />
+	<span><a href="<c:url value="/employee/register" />"><s:message
+				code="home.add.new" /></a></span>
+	<br />
+	<br />
+
+	<c:choose>
+		<c:when test="${employeeList.size()==0}">
+			<span><s:message code="employees.no" /></span>
+		</c:when>
+		<c:otherwise>
+			<table align="center" cellpadding="10">
+				<tr>
+					<th><s:message code="employees.id" /></th>
+					<th><s:message code="register.name" /></th>
+					<th><s:message code="employees.age" /></th>
+					<th><s:message code="register.salary" /></th>
+					<th><s:message code="register.title" /></th>
+					<th><s:message code="register.department" /></th>
+					<th><s:message code="register.email" /></th>
+					<th></th>
+				</tr>
+				<c:forEach items="${employeeList}" var="employee">
+					<tr>
+						<td><c:out value="${employee.id}" /></td>
+						<td><c:out value="${employee.name}" /></td>
+						<td><c:out value="${employee.age}" /></td>
+						<td><c:out value="${employee.salary}" /></td>
+						<td><c:out value="${employee.jobTitle}" /></td>
+						<td><c:out value="${employee.department}" /></td>
+						<td><c:out value="${employee.email}" /></td>
+						<td><form method="post"
+								action="<c:url value="/employee/delete" />">
+								<input type="hidden" value="${employee.id}" name="id" /> <input
+									type="submit" value="Delete">
+							</form></td>
+						<td><form method="get"
+								action="<c:url value="/employee/edit" />">
+								<input type="hidden" value="${employee.id}" name="id" /> <input
+									type="submit" value="Edit">
+							</form></td>
+					</tr>
+				</c:forEach>
+			</table>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

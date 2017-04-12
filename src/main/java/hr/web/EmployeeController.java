@@ -7,8 +7,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import hr.beans.Employee;
 import hr.data.EmployeeRepository;
@@ -25,7 +28,8 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/register", method = GET)
-	public String showRegistrationForm() {
+	public String showRegistrationForm(Model model) {
+		model.addAttribute(new Employee());
 		return "registerForm";
 	}
 
@@ -36,6 +40,24 @@ public class EmployeeController {
 		}
 
 		employeeRepository.addEmployee(employee);
+		return "redirect:/employees";
+	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public String processDelete(@RequestParam long id) {
+		employeeRepository.deleteEmployee(id);
+		return "redirect:/employees";
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String processEdit(@RequestParam long id, Model model) {
+		model.addAttribute(employeeRepository.findById(id));
+		return "registerForm";
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String saveEdit(@Valid Employee employee) {
+		employeeRepository.updateEmployee(employee);
 		return "redirect:/employees";
 	}
 

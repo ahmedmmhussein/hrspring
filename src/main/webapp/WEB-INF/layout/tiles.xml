@@ -21,4 +21,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/employees.jsp" />
 	</definition>
 
+	<definition name="employee" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/employee.jsp" />
+	</definition>
+	<definition name="errorpage" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/errorpage.jsp" />
+	</definition>
+
 </tiles-definitions>

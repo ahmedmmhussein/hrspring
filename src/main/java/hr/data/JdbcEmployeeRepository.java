@@ -27,7 +27,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 	}
 
 	@Override
-	public List<Employee> findEmployees(long max, int count) {
+	public List<Employee> findEmployees() {
 		return jdbc.query("select * from Employee", new EmployeeRowMapper());
 	}
 

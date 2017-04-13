@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,22 +45,26 @@
 				<c:forEach items="${employeeList}" var="employee">
 					<tr>
 						<td><c:out value="${employee.id}" /></td>
-						<td><c:out value="${employee.name}" /></td>
+						<td><a href="<c:url value="/employees/${employee.id}" />"><c:out
+									value="${employee.name}" /></a></td>
 						<td><c:out value="${employee.age}" /></td>
-						<td><c:out value="${employee.salary}" /></td>
+						<td><fmt:setLocale value="${info.locale}" scope="session" />
+							<fmt:formatNumber value="${employee.salary}" type="currency" /></td>
 						<td><c:out value="${employee.jobTitle}" /></td>
 						<td><c:out value="${employee.department}" /></td>
 						<td><c:out value="${employee.email}" /></td>
-						<td><form method="post"
-								action="<c:url value="/employee/delete" />">
-								<input type="hidden" value="${employee.id}" name="id" /> <input
-									type="submit" value="Delete">
-							</form></td>
 						<td><form method="get"
 								action="<c:url value="/employee/edit" />">
 								<input type="hidden" value="${employee.id}" name="id" /> <input
 									type="submit" value="Edit">
 							</form></td>
+						<td><c:if test="${employee.salary==0}">
+								<form method="post" action="<c:url value="/employee/delete" />">
+									<input type="hidden" value="${employee.id}" name="id" /> <input
+										type="submit" value="Delete"
+										onclick="return confirm('Are you sure you want to delete this Employee?')">
+								</form>
+							</c:if></td>
 					</tr>
 				</c:forEach>
 			</table>

@@ -7,7 +7,7 @@ import hr.beans.Employee;
 public interface EmployeeRepository {
 	List<Employee> findRecentSpittles();
 
-	List<Employee> findEmployees(long max, int count);
+	List<Employee> findEmployees();
 
 	Employee findById(long id);
 

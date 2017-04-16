@@ -16,6 +16,7 @@
 </head>
 
 <body>
+	<%@ include file="../jspf/languagebar.jspf"%>
 	<h2>
 		<s:message code="employees.list" />
 	</h2>

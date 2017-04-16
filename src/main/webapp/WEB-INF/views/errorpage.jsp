@@ -8,6 +8,7 @@
 <title>Error</title>
 </head>
 <body>
+	<%@ include file="../jspf/languagebar.jspf"%>
 	<h2 style="text-align: center; margin: 50px; color: red;">
 		<s:message code="error.page" />
 		</h2>

@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
+<%@ taglib uri="http://poet.com/jsp/tlds/mytags" prefix="mytags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,6 +36,7 @@ span.error {
 <title>Registration Page</title>
 </head>
 <body>
+	<%@ include file="../jspf/languagebar.jspf"%>
 	<c:choose>
 		<c:when test="${employee.getId()!=0}">
 			<h2>
@@ -52,14 +54,17 @@ span.error {
 
 			<!----- First Name ---------------------------------------------------------->
 			<tr>
-				<td><s:message code="register.name" /></td>
+				<td><mytags:customLabel>
+						<s:message code="register.name" />
+					</mytags:customLabel></td>
 				<td><sf:input path="name" /> <sf:errors path="name"
 						cssClass="error" /></td>
 			</tr>
 
 			<!----- Date Of Birth -------------------------------------------------------->
 			<tr>
-				<td><s:message code="register.date" />(dd/MM/yyyy)</td>
+				<td><mytags:customLabel>
+						<s:message code="register.date" />(dd/MM/yyyy)</mytags:customLabel></td>
 
 				<td><sf:input path="dataofBirth" /> <sf:errors
 						path="dataofBirth" cssClass="error" /></td>
@@ -67,21 +72,27 @@ span.error {
 
 			<!----- Salary ---------------------------------------------------------->
 			<tr>
-				<td><s:message code="register.salary" /></td>
+				<td><mytags:customLabel>
+						<s:message code="register.salary" />
+					</mytags:customLabel></td>
 				<td><sf:input type="number" path="salary" /> <sf:errors
 						path="salary" cssClass="error" /></td>
 			</tr>
 
 			<!----- Job title ---------------------------------------------------------->
 			<tr>
-				<td><s:message code="register.title" /></td>
+				<td><mytags:customLabel>
+						<s:message code="register.title" />
+					</mytags:customLabel></td>
 				<td><sf:input path="jobTitle" /> <sf:errors path="jobTitle"
 						cssClass="error" /></td>
 			</tr>
 
 			<!----- Department ---------------------------------------------------------->
 			<tr>
-				<td><s:message code="register.department" /></td>
+				<td><mytags:customLabel>
+						<s:message code="register.department" />
+					</mytags:customLabel></td>
 				<td><sf:select path="department">
 
 						<sf:option value=""></sf:option>
@@ -96,7 +107,9 @@ span.error {
 
 			<!----- Email ---------------------------------------------------------->
 			<tr>
-				<td><s:message code="register.email" /></td>
+				<td><mytags:customLabel>
+						<s:message code="register.email" />
+					</mytags:customLabel></td>
 				<td><sf:input path="email" /> <sf:errors path="email"
 						cssClass="error" /></td>
 			</tr>

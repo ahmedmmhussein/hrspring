@@ -1,6 +1,13 @@
 package hr.web;
 
+import java.awt.List;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Locale;
+
+import javax.servlet.descriptor.JspConfigDescriptor;
+import javax.servlet.descriptor.JspPropertyGroupDescriptor;
+import javax.servlet.descriptor.TaglibDescriptor;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -76,6 +83,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		// TODO Auto-generated method stub
+		registry.addResourceHandler("*.jspf");
 		super.addResourceHandlers(registry);
 	}
 

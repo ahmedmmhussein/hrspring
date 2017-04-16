@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://poet.com/jsp/tlds/mytags" prefix="mytags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,56 +32,73 @@ tr:nth-child(even) {
 <title>Registration Page</title>
 </head>
 <body>
+	<%@ include file="../jspf/languagebar.jspf"%>
 	<table align="center" cellpadding="10">
 
 		<!----- ID ---------------------------------------------------------->
 		<tr>
-			<td><s:message code="employees.id" /></td>
+			<td><mytags:customLabel>
+					<s:message code="employees.id" />
+				</mytags:customLabel></td>
 			<td><span><c:out value="${employee.id}" /></span></td>
 		</tr>
 		<!----- First Name ---------------------------------------------------------->
 		<tr>
-			<td><s:message code="register.name" /></td>
+			<td><mytags:customLabel>
+					<s:message code="register.name" />
+				</mytags:customLabel></td>
 			<td><span><c:out value="${employee.name}" /></span></td>
 		</tr>
 
 		<!----- Date Of Birth -------------------------------------------------------->
 		<tr>
-			<td><s:message code="register.date" /></td>
+			<td><mytags:customLabel>
+					<s:message code="register.date" />
+				</mytags:customLabel></td>
 			<td><span><fmt:formatDate type="date"
 						value="${employee.dataofBirth}" /></span></td>
 		</tr>
 
 		<!----- Age -------------------------------------------------------->
 		<tr>
-			<td><s:message code="employees.age" /></td>
+			<td><mytags:customLabel>
+					<s:message code="employees.age" />
+				</mytags:customLabel></td>
 			<td><span><c:out value="${employee.age}" /></span></td>
 		</tr>
 
 		<!----- Salary ---------------------------------------------------------->
 		<tr>
-			<td><s:message code="register.salary" /></td>
+			<td><mytags:customLabel>
+					<s:message code="register.salary" />
+				</mytags:customLabel></td>
 			<td><span><fmt:setLocale value="${info.locale}"
-						scope="session" />
-					<fmt:formatNumber value="${employee.salary}" type="currency" /></span></td>
+						scope="session" /> <fmt:formatNumber value="${employee.salary}"
+						type="currency" /></span></td>
 		</tr>
 
 		<!----- Job title ---------------------------------------------------------->
 		<tr>
-			<td><s:message code="register.title" /></td>
+			<td><mytags:customLabel>
+					<s:message code="register.title" />
+				</mytags:customLabel></td>
 			<td><span><c:out value="${employee.jobTitle}" /></span></td>
 		</tr>
 
 		<!----- Department ---------------------------------------------------------->
 		<tr>
-			<td><s:message code="register.department" /></td>
+			<td><mytags:customLabel>
+					<s:message code="register.department" />
+				</mytags:customLabel></td>
 			<td><span><c:out value="${employee.department}" /></span></td>
 		</tr>
 
 
 		<!----- Email ---------------------------------------------------------->
 		<tr>
-			<td><s:message code="register.email" /></td>
+			<td><mytags:customLabel>
+					<s:message code="register.email" />
+				</mytags:customLabel></td>
 			<td><span><c:out value="${employee.email}" /></span></td>
 		</tr>
 	</table>

@@ -11,22 +11,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-td, th {
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-</style>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/style.css" />">
 <title>Registration Page</title>

@@ -50,3 +50,9 @@ tr:nth-child(even) {
 span.error {
 	color: red;
 }
+
+.errorPage{
+	text-align: center; 
+	margin: 50px; 
+	color: red;
+}

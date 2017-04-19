@@ -28,4 +28,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/errorpage.jsp" />
 	</definition>
 
+	<definition name="login" extends="base">
+		<put-attribute name="body" value="/WEB-INF/views/login.jsp" />
+	</definition>
 </tiles-definitions>

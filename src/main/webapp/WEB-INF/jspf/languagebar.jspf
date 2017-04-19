@@ -3,6 +3,7 @@
 	<p>
 		<a href="<c:url value="?locale=en" />"><s:message
 				code="home.english" /></a> | <a href="<c:url value="?locale=de" />"><s:message
-				code="home.german" /></a>
+				code="home.german" /></a> <a style="float: right;"
+			href="<c:url value="/logout" />"><s:message code="home.logout" /></a>
 	</p>
 </div>

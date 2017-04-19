@@ -1,13 +1,6 @@
 package hr.web;
 
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
-
-import javax.servlet.descriptor.JspConfigDescriptor;
-import javax.servlet.descriptor.JspPropertyGroupDescriptor;
-import javax.servlet.descriptor.TaglibDescriptor;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +12,7 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -81,10 +74,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	}
 
 	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		// TODO Auto-generated method stub
-		registry.addResourceHandler("*.jspf");
-		super.addResourceHandlers(registry);
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/login").setViewName("login");
 	}
 
 }

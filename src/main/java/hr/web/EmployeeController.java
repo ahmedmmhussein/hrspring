@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import hr.beans.Employee;
+import hr.data.DepartmentRepository;
 import hr.data.EmployeeRepository;
 
 @Controller
@@ -23,14 +23,18 @@ public class EmployeeController {
 
 	private EmployeeRepository employeeRepository;
 
+	private DepartmentRepository departmentRepository;
+
 	@Autowired
-	public EmployeeController(EmployeeRepository employeeRepository) {
+	public EmployeeController(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
 		this.employeeRepository = employeeRepository;
+		this.departmentRepository = departmentRepository;
 	}
 
 	@RequestMapping(value = "/register", method = GET)
 	public String showRegistrationForm(Model model) {
 		model.addAttribute(new Employee());
+		model.addAttribute("departmentsList", departmentRepository.findDepartments());
 		return "registerForm";
 	}
 
@@ -53,6 +57,7 @@ public class EmployeeController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String processEdit(@RequestParam long id, Model model) {
 		model.addAttribute(employeeRepository.findById(id));
+		model.addAttribute("departmentsList", departmentRepository.findDepartments());
 		return "registerForm";
 	}
 

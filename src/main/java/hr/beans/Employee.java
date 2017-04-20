@@ -30,8 +30,7 @@ public class Employee {
 	@Past(message = "{dataofBirth.date}")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataofBirth;
-	@NotEmpty(message = "{department.valid}")
-	private String department;
+	private Department department;
 	@NotNull
 	@Email(message = "{email.valid}")
 	private String email;
@@ -40,7 +39,7 @@ public class Employee {
 		super();
 	}
 
-	public Employee(int id, String name2, String email2, String jobTitle2, Long salary2, String department2,
+	public Employee(int id, String name2, String email2, String jobTitle2, Long salary2, Department department2,
 			Date dataofBirth) {
 		this.id = id;
 		name = name2;
@@ -102,11 +101,11 @@ public class Employee {
 		this.dataofBirth = dataofBirth;
 	}
 
-	public String getDepartment() {
+	public Department getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(String department) {
+	public void setDepartment(Department department) {
 		this.department = department;
 	}
 

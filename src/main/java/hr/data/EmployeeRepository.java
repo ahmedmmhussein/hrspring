@@ -5,7 +5,6 @@ import java.util.List;
 import hr.beans.Employee;
 
 public interface EmployeeRepository {
-	List<Employee> findRecentSpittles();
 
 	List<Employee> findEmployees();
 

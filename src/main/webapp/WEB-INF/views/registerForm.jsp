@@ -73,14 +73,10 @@
 				<td><mytags:customLabel>
 						<s:message code="register.department" />
 					</mytags:customLabel></td>
-				<td><sf:select path="department">
-
-						<sf:option value=""></sf:option>
-						<sf:option value="Production">Production</sf:option>
-						<sf:option value="Research and Development">Research and Development</sf:option>
-						<sf:option value="Marketing">Marketing</sf:option>
-						<sf:option value="Human Resource Management">Human Resource Management</sf:option>
-						<sf:option value="Accounting and Finance">Accounting and Finance</sf:option>
+				<td><sf:select path="department.departmentId">
+						<c:forEach items="${departmentsList}" var="department">
+							<sf:option value="${department.departmentId}">${department.departmentName}</sf:option>
+						</c:forEach>
 					</sf:select> <sf:errors path="department" cssClass="error" /></td>
 			</tr>
 

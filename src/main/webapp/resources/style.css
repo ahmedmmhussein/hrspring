@@ -51,8 +51,16 @@ span.error {
 	color: red;
 }
 
-.errorPage{
-	text-align: center; 
-	margin: 50px; 
+.errorPage {
+	text-align: center;
+	margin: 50px;
 	color: red;
+}
+
+fieldset {
+	border: 0;
+}
+
+.overflow {
+	height: 200px;
 }

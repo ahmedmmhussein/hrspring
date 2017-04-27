@@ -13,6 +13,25 @@
 <head>
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/style.css" />">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
+			dateFormat : "dd/mm/yy"
+		}).val();
+	});
+
+	$(function() {
+		$(".widget input[type=submit], .widget a, .widget button").button();
+		$("button, input, a").click(function(event) {
+
+		});
+	});
+	$("#salutation").selectmenu();
+</script>
 <title>Registration Page</title>
 </head>
 <body>
@@ -44,9 +63,10 @@
 			<!----- Date Of Birth -------------------------------------------------------->
 			<tr>
 				<td><mytags:customLabel>
-						<s:message code="register.date" />(dd/MM/yyyy)</mytags:customLabel></td>
+						<s:message code="register.date" />
+					</mytags:customLabel></td>
 
-				<td><sf:input path="dataofBirth" /> <sf:errors
+				<td><sf:input path="dataofBirth" id="datepicker" /> <sf:errors
 						path="dataofBirth" cssClass="error" /></td>
 			</tr>
 
@@ -73,7 +93,8 @@
 				<td><mytags:customLabel>
 						<s:message code="register.department" />
 					</mytags:customLabel></td>
-				<td><sf:select path="department.departmentId">
+				<td><sf:select id="salutation" path="department.departmentId">
+						<option disabled selected>Please pick one</option>
 						<c:forEach items="${departmentsList}" var="department">
 							<sf:option value="${department.departmentId}">${department.departmentName}</sf:option>
 						</c:forEach>
@@ -96,11 +117,14 @@
 			<tr>
 				<td colspan="2" align="center"><c:choose>
 						<c:when test="${employee.getId()!=0}">
-							<input type="submit" value=<s:message code="register.save" />>
+							<input class="ui-button ui-widget ui-corner-all" type="submit"
+								value=<s:message code="register.save" />>
 						</c:when>
 						<c:otherwise>
-							<input type="submit" value=<s:message code="register.submit" />>
-							<input type="reset" value=<s:message code="register.reset" />>
+							<input class="ui-button ui-widget ui-corner-all" type="submit"
+								value=<s:message code="register.submit" /> />
+							<input class="ui-button ui-widget ui-corner-all" type="reset"
+								value=<s:message code="register.reset" /> />
 						</c:otherwise>
 					</c:choose></td>
 			</tr>

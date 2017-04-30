@@ -17,21 +17,9 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#datepicker").datepicker({
-			dateFormat : "dd/mm/yy"
-		}).val();
-	});
-
-	$(function() {
-		$(".widget input[type=submit], .widget a, .widget button").button();
-		$("button, input, a").click(function(event) {
-
-		});
-	});
-	$("#salutation").selectmenu();
-</script>
+<script
+	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="<c:url value="/resources/script.js" />"></script>
 <title>Registration Page</title>
 </head>
 <body>
@@ -48,7 +36,7 @@
 			</h2>
 		</c:otherwise>
 	</c:choose>
-	<sf:form method="POST" commandName="employee">
+	<sf:form id="registerForm" method="POST" commandName="employee">
 		<table align="center" cellpadding="10">
 
 			<!----- First Name ---------------------------------------------------------->
@@ -66,7 +54,7 @@
 						<s:message code="register.date" />
 					</mytags:customLabel></td>
 
-				<td><sf:input path="dataofBirth" id="datepicker" /> <sf:errors
+				<td><sf:input readonly="true" path="dataofBirth" id="datepicker" /> <sf:errors
 						path="dataofBirth" cssClass="error" /></td>
 			</tr>
 
@@ -93,7 +81,8 @@
 				<td><mytags:customLabel>
 						<s:message code="register.department" />
 					</mytags:customLabel></td>
-				<td><sf:select id="salutation" path="department.departmentId">
+				<td><sf:select name="department" id="salutation"
+						path="department.departmentId">
 						<option disabled selected>Please pick one</option>
 						<c:forEach items="${departmentsList}" var="department">
 							<sf:option value="${department.departmentId}">${department.departmentName}</sf:option>

@@ -27,12 +27,12 @@
 	</h2>
 	<br />
 	<br />
-	<security:authorize access="hasRole('ROLE_ADMIN')">
+	<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
 		<span><a href="<c:url value="/employee/register" />"><s:message
 					code="home.add.new" /></a></span>
 		<br />
 		<br />
-	</security:authorize>
+	<%-- </security:authorize> --%>
 	<c:choose>
 		<c:when test="${employeeList.size()==0}">
 			<span><s:message code="employees.no" /></span>
@@ -62,14 +62,14 @@
 						<td><c:out value="${employee.jobTitle}" /></td>
 						<td><c:out value="${employee.department}" /></td>
 						<td><c:out value="${employee.email}" /></td>
-						<td><security:authorize access="hasRole('ROLE_ADMIN')">
+						<td><%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
 								<form method="get" action="<c:url value="/employee/edit" />">
 									<input type="hidden" value="${employee.id}" name="id" /> <input
 										class="ui-button ui-widget ui-corner-all" type="submit"
 										value="Edit">
 								</form>
-							</security:authorize></td>
-						<td><security:authorize access="hasRole('ROLE_ADMIN')">
+							<%-- </security:authorize> --%></td>
+						<td><%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
 								<c:if test="${employee.salary==0}">
 									<form method="post" action="<c:url value="/employee/delete" />">
 										<input type="hidden" value="${employee.id}" name="id" /> <input
@@ -78,7 +78,7 @@
 											onclick="return confirm('Are you sure you want to delete this Employee?')">
 									</form>
 								</c:if>
-							</security:authorize></td>
+							<%-- </security:authorize> --%></td>
 					</tr>
 				</c:forEach>
 			</table>

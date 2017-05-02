@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class AppWideExceptionHandler {
-@ExceptionHandler(EmptyResultDataAccessException.class)
+/*@ExceptionHandler(EmptyResultDataAccessException.class)
 public String outofRangeHandler(){
 	return "errorpage";
 	
-}
+}*/
 }

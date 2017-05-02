@@ -23,21 +23,29 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 		this.jdbc = jdbc;
 	}
 
-	@Secured({ "ROLE_USER", "ROLE_ADMIN" })
+	/* @Secured({ "ROLE_USER", "ROLE_ADMIN" }) */
 	@Override
 	public List<Employee> findEmployees() {
 		return jdbc.query("select * from Employee, Department where department = departmentId",
 				new EmployeeRowMapper());
 	}
 
-	@PreAuthorize("isAuthenticated()")
+	/* @PreAuthorize("isAuthenticated()") */
 	@Override
 	public Employee findById(long id) {
-		return jdbc.queryForObject("select * from Employee , Department where department = departmentId AND id=?",
-				new EmployeeRowMapper(), id);
+		Employee employee = null;
+		try {
+			employee = jdbc.queryForObject(
+					"select * from Employee , Department where department = departmentId AND id=?",
+					new EmployeeRowMapper(), id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return employee;
 	}
 
-	@Secured("ROLE_ADMIN")
+	/* @Secured("ROLE_ADMIN") */
 	@Override
 	public void addEmployee(Employee employee) {
 		jdbc.update(
@@ -47,7 +55,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 				employee.getEmail(), employee.getDataofBirth(), employee.getSalary());
 	}
 
-	@Secured("ROLE_ADMIN")
+	/* @Secured("ROLE_ADMIN") */
 	@Override
 	public void updateEmployee(Employee employee) {
 		jdbc.update(
@@ -56,7 +64,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 				employee.getEmail(), employee.getDataofBirth(), employee.getId());
 	}
 
-	@Secured("ROLE_ADMIN")
+	/* @Secured("ROLE_ADMIN") */
 	@Override
 	public void deleteEmployee(long id) {
 		jdbc.update("DELETE FROM Employee WHERE id=?", id);
@@ -67,8 +75,8 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 			Department department = new Department();
 			department.setDepartmentId(rs.getInt("departmentId"));
 			department.setDepartmentName(rs.getString("departmentName"));
-			return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("email"),
-					rs.getString("jobTitle"), rs.getLong("salary"), department, rs.getDate("dataofBirth"));
+			return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("jobTitle"),
+					rs.getLong("salary"), department, rs.getDate("dataofBirth"));
 
 		}
 	}

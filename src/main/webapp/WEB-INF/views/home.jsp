@@ -27,10 +27,10 @@
 		<h3>
 			<a href="<c:url value="/employees" />"><s:message
 					code="home.view.all" /></a>
-			<security:authorize access="hasRole('ROLE_ADMIN')"> | <a
+			<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%> | <a
 					href="<c:url value="/employee/register" />"><s:message
 						code="home.add.new" /></a>
-			</security:authorize>
+			<%-- </security:authorize> --%>
 		</h3>
 	</div>
 </body>

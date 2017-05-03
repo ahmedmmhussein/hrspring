@@ -54,7 +54,7 @@
 						<s:message code="register.date" />
 					</mytags:customLabel></td>
 
-				<td><sf:input readonly="true" path="dataofBirth" id="datepicker" /> <sf:errors
+				<td><sf:input path="dataofBirth" id="datepicker" /> <sf:errors
 						path="dataofBirth" cssClass="error" /></td>
 			</tr>
 

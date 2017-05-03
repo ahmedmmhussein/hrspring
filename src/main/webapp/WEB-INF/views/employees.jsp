@@ -11,12 +11,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/style.css" />">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="https://jqueryui.com/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="<c:url value="/resources/script.js" />"></script>
+<script src="<c:url value="/resources/ajax.js" />"></script>
 <title>Employees Page</title>
 </head>
 
@@ -28,10 +31,10 @@
 	<br />
 	<br />
 	<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
-		<span><a href="<c:url value="/employee/register" />"><s:message
-					code="home.add.new" /></a></span>
-		<br />
-		<br />
+	<span><a href="<c:url value="/employee/register" />"><s:message
+				code="home.add.new" /></a></span>
+	<br />
+	<br />
 	<%-- </security:authorize> --%>
 	<c:choose>
 		<c:when test="${employeeList.size()==0}">
@@ -62,27 +65,37 @@
 						<td><c:out value="${employee.jobTitle}" /></td>
 						<td><c:out value="${employee.department}" /></td>
 						<td><c:out value="${employee.email}" /></td>
-						<td><%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
-								<form method="get" action="<c:url value="/employee/edit" />">
+						<td>
+							<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
+							<form method="get" action="<c:url value="/employee/edit" />">
+								<input type="hidden" value="${employee.id}" name="id" /> <input
+									class="ui-button ui-widget ui-corner-all" type="submit"
+									value="Edit">
+							</form> <%-- </security:authorize> --%>
+						</td>
+						<td>
+							<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%> <c:if
+								test="${employee.salary==0}">
+								<form method="post" action="<c:url value="/employee/delete" />">
 									<input type="hidden" value="${employee.id}" name="id" /> <input
 										class="ui-button ui-widget ui-corner-all" type="submit"
-										value="Edit">
+										value="Delete"
+										onclick="return confirm('Are you sure you want to delete this Employee?')">
 								</form>
-							<%-- </security:authorize> --%></td>
-						<td><%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
-								<c:if test="${employee.salary==0}">
-									<form method="post" action="<c:url value="/employee/delete" />">
-										<input type="hidden" value="${employee.id}" name="id" /> <input
-											class="ui-button ui-widget ui-corner-all" type="submit"
-											value="Delete"
-											onclick="return confirm('Are you sure you want to delete this Employee?')">
-									</form>
-								</c:if>
-							<%-- </security:authorize> --%></td>
+							</c:if> <%-- </security:authorize> --%>
+						</td>
+						<td><button class="ui-button ui-widget ui-corner-all"
+								id="employeeDetails" value="${employee.id}">view more</button></td>
 					</tr>
 				</c:forEach>
 			</table>
 		</c:otherwise>
 	</c:choose>
+
+	<div id="dialog" title="Basic dialog">
+		<p>This is an animated dialog which is useful for displaying
+			information. The dialog window can be moved, resized and closed with
+			the 'x' icon.</p>
+	</div>
 </body>
 </html>

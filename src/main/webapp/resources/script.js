@@ -1,6 +1,8 @@
 $(function() {
 	$("#datepicker").datepicker({
-		dateFormat : "dd/mm/yy"
+		dateFormat : "dd/mm/yy",
+		changeMonth : true,
+		changeYear : true
 	}).val();
 });
 
@@ -12,6 +14,10 @@ $(function() {
 });
 $("#salutation").selectmenu();
 
+$.validator.addMethod("dateFormat", function(value, element) {
+	return value.match(/^dd?-dd?-dd$/);
+}, "Please enter a date in the format dd-mm-yyyy.");
+
 $(document).ready(function() {
 	$('#registerForm').validate({
 		success : "valid",
@@ -20,7 +26,8 @@ $(document).ready(function() {
 				required : true
 			},
 			dataofBirth : {
-				required : true
+				required : true,
+				dateFormat : true
 			},
 			salary : {
 				required : true,

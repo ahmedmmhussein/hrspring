@@ -24,8 +24,10 @@ public class EmployeesController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Employee> employees() {
-		return employeeRepository.findEmployees();
+	public String employees(Model model) {
+		model.addAttribute("dialogEmp",new Employee());
+		model.addAttribute(employeeRepository.findEmployees());
+		return "employees";
 	}
 
 	@RequestMapping(value = "/{employeeId}", method = RequestMethod.GET)

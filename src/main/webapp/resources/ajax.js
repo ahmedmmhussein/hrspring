@@ -33,3 +33,19 @@ $(function() {
 		autoOpen : false
 	});
 });
+
+
+$("#registerForm").on("submit", function(){
+	var str = $("#registerForm").serialize();
+	$.ajax({
+	    type:"post",
+	    data:str,
+	    url:"http://localhost:8080/hrspring/rest/employees/add",
+	    async: false,
+	    dataType: "json",
+	    success: function(){
+	       alert("success");
+	    }
+	});
+	   return false;
+	 })

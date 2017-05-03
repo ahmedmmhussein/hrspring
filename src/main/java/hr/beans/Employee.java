@@ -34,6 +34,7 @@ public class Employee {
 	@NotNull
 	@Email(message = "{email.valid}")
 	private String email;
+	private long departmentId;
 
 	public Employee() {
 		super();
@@ -115,6 +116,15 @@ public class Employee {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public long getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(long departmentId) {
+		this.department = new Department();
+		this.department.setDepartmentId(departmentId);
 	}
 
 	@Override

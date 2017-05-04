@@ -2,7 +2,8 @@ $(function() {
 	$("#datepicker").datepicker({
 		dateFormat : "dd/mm/yy",
 		changeMonth : true,
-		changeYear : true
+		changeYear : true,
+		 yearRange: "1930:2010"
 	}).val();
 });
 

@@ -118,10 +118,6 @@ public class Employee {
 		this.email = email;
 	}
 
-	public long getDepartmentId() {
-		return departmentId;
-	}
-
 	public void setDepartmentId(long departmentId) {
 		this.department = new Department();
 		this.department.setDepartmentId(departmentId);

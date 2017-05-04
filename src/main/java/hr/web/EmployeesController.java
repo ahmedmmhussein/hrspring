@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import hr.beans.Employee;
+import hr.data.DepartmentRepository;
 import hr.data.EmployeeRepository;
 
 @Controller
@@ -18,15 +19,18 @@ public class EmployeesController {
 
 	private EmployeeRepository employeeRepository;
 
+	private DepartmentRepository departmentRepository;
+
 	@Autowired
-	public EmployeesController(EmployeeRepository employeeRepository) {
+	public EmployeesController(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
 		this.employeeRepository = employeeRepository;
+		this.departmentRepository = departmentRepository;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String employees(Model model) {
-		model.addAttribute("dialogEmp",new Employee());
-		model.addAttribute(employeeRepository.findEmployees());
+		model.addAttribute("departmentsList", departmentRepository.findDepartments());
+		model.addAttribute("employeeList", employeeRepository.findEmployees());
 		return "employees";
 	}
 

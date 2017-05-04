@@ -47,19 +47,18 @@
 				<tr>
 					<th><s:message code="employees.id" /></th>
 					<th><s:message code="register.name" /></th>
-					<th><s:message code="employees.age" /></th>
 					<th><s:message code="register.salary" /></th>
 					<th><s:message code="register.title" /></th>
 					<th><s:message code="register.department" /></th>
 					<th><s:message code="register.email" /></th>
 					<th></th>
 				</tr>
+				 <tbody>
 				<c:forEach items="${employeeList}" var="employee">
 					<tr>
 						<td><c:out value="${employee.id}" /></td>
 						<td><a href="<c:url value="/employees/${employee.id}" />"><c:out
 									value="${employee.name}" /></a></td>
-						<td><c:out value="${employee.age}" /></td>
 						<td><fmt:setLocale value="${info.locale}" scope="session" />
 							<fmt:formatNumber value="${employee.salary}" type="currency" /></td>
 						<td><c:out value="${employee.jobTitle}" /></td>
@@ -84,18 +83,49 @@
 								</form>
 							</c:if> <%-- </security:authorize> --%>
 						</td>
-						<td><button class="ui-button ui-widget ui-corner-all"
-								id="employeeDetails" value="${employee.id}">view more</button></td>
+						<td><button class="ui-button ui-widget ui-corner-all employeeDetails" value="${employee.id}">view more</button></td>
 					</tr>
 				</c:forEach>
+				 <tbody>
 			</table>
 		</c:otherwise>
 	</c:choose>
-
+	<button id="create-user">Create new user</button>
 	<div id="dialog" title="Basic dialog">
 		<p>This is an animated dialog which is useful for displaying
 			information. The dialog window can be moved, resized and closed with
 			the 'x' icon.</p>
 	</div>
+
+	<div id="dialog-form" title="Create new user">
+		<p class="validateTips">All form fields are required.</p>
+
+		<form id="myForm">
+			<fieldset>
+				<label for="name">Name</label> <input type="text" name="name"
+					id="name" class="text ui-widget-content ui-corner-all"> <label
+					for="name">Date of birth</label> <input readonly="true" type="text"
+					name="dataofBirth" id="datepicker"
+					class="text ui-widget-content ui-corner-all"> <label
+					for="name">Salary</label> <input type="integer" name="salary"
+					id="salary" class="text ui-widget-content ui-corner-all"> <label
+					for="name">Job Title</label> <input type="text" name="jobTitle"
+					id="jobTitle" class="text ui-widget-content ui-corner-all">
+				<label for="email">Department</label> <select name="departmentId"
+					id="departmentId">
+					<option disabled selected>Please pick one</option>
+					<c:forEach items="${departmentsList}" var="department">
+						<option value="${department.departmentId}">${department.departmentName}</option>
+					</c:forEach>
+				</select> <label for="email">Email</label> <input type="text" name="email"
+					id="email" class="text ui-widget-content ui-corner-all">
+
+				<!-- Allow form submission with keyboard without duplicating the dialog button -->
+				<input type="submit" tabindex="-1"
+					style="position: absolute; top: -1000px">
+			</fieldset>
+		</form>
+	</div>
+
 </body>
 </html>

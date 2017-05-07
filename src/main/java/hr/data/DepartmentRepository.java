@@ -6,4 +6,6 @@ import hr.beans.Department;
 
 public interface DepartmentRepository {
 	List<Department> findDepartments();
+
+	Department findById(int id);
 }

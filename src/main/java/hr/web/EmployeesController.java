@@ -1,7 +1,5 @@
 package hr.web;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,34 +7,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import hr.beans.Employee;
-import hr.data.DepartmentRepository;
-import hr.data.EmployeeRepository;
+import hr.service.DepartmentManger;
+import hr.service.EmployeeManger;
 
 @Controller
 @RequestMapping("/employees")
 public class EmployeesController {
 
-	private EmployeeRepository employeeRepository;
+	private EmployeeManger employeeManger;
 
-	private DepartmentRepository departmentRepository;
+	private DepartmentManger departmentManger;
 
 	@Autowired
-	public EmployeesController(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
-		this.employeeRepository = employeeRepository;
-		this.departmentRepository = departmentRepository;
+	public EmployeesController(EmployeeManger employeeManger, DepartmentManger departmentManger) {
+		this.employeeManger = employeeManger;
+		this.departmentManger = departmentManger;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String employees(Model model) {
-		model.addAttribute("departmentsList", departmentRepository.findDepartments());
-		model.addAttribute("employeeList", employeeRepository.findEmployees());
+		model.addAttribute("departmentsList", departmentManger.findDepartments());
+		model.addAttribute("employeeList", employeeManger.findEmployees());
 		return "employees";
 	}
 
 	@RequestMapping(value = "/{employeeId}", method = RequestMethod.GET)
-	public String showEmployee(@PathVariable long employeeId, Model model) {
-		model.addAttribute(employeeRepository.findById(employeeId));
+	public String showEmployee(@PathVariable int employeeId, Model model) {
+		model.addAttribute(employeeManger.findEmployeeById(employeeId));
 		return "employee";
 	}
 

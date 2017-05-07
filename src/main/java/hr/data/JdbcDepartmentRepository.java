@@ -25,4 +25,9 @@ public class JdbcDepartmentRepository implements DepartmentRepository {
 		return jdbc.query("select * from Department", new BeanPropertyRowMapper(Department.class));
 	}
 
+	@Override
+	public Department findById(int id) {
+		return (Department) jdbc.queryForObject("select * from Department where departmentId = ?",
+				new BeanPropertyRowMapper(Department.class), id);
+	}
 }

@@ -17,26 +17,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hr.beans.Employee;
 import hr.data.EmployeeRepository;
+import hr.service.EmployeeManger;
 
 @RestController
 @RequestMapping("rest/employees")
 public class EmployeeApiController {
 
-	private EmployeeRepository employeeRepository;
+	private EmployeeManger employeeManger;
 
 	@Autowired
-	public EmployeeApiController(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
+	public EmployeeApiController(EmployeeManger employeeManger) {
+		this.employeeManger = employeeManger;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Employee> employees() {
-		return employeeRepository.findEmployees();
+		return employeeManger.findEmployees();
 	}
 
 	@RequestMapping(value = "/{employeeId}", method = RequestMethod.GET)
-	public Employee employee(@PathVariable long employeeId) {
-		Employee employee = employeeRepository.findById(employeeId);
+	public Employee employee(@PathVariable int employeeId) {
+		Employee employee = employeeManger.findEmployeeById(employeeId);
 		if (employee == null) {
 			throw new EmployeeNotFoundException(employeeId);
 		}
@@ -45,8 +46,8 @@ public class EmployeeApiController {
 
 	@RequestMapping(value = "/add", method = POST, consumes = "application/json")
 	public void addEmployee(@RequestBody Employee employee, Model model) {
-		employeeRepository.addEmployee(employee);
-		model.addAttribute("employeeList", employeeRepository.findEmployees());
+		employeeManger.addEmployee(employee);
+		model.addAttribute("employeeList", employeeManger.findEmployees());
 	}
 
 	@ExceptionHandler(EmployeeNotFoundException.class)

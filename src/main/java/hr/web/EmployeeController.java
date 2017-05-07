@@ -14,27 +14,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import hr.beans.Employee;
-import hr.data.DepartmentRepository;
-import hr.data.EmployeeRepository;
+import hr.service.DepartmentManger;
+import hr.service.EmployeeManger;
 
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
 
-	private EmployeeRepository employeeRepository;
+	private EmployeeManger employeeManger;
 
-	private DepartmentRepository departmentRepository;
+	private DepartmentManger departmentManger;
 
 	@Autowired
-	public EmployeeController(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository) {
-		this.employeeRepository = employeeRepository;
-		this.departmentRepository = departmentRepository;
+	public EmployeeController(EmployeeManger employeeManger, DepartmentManger departmentManger) {
+		this.employeeManger = employeeManger;
+		this.departmentManger = departmentManger;
 	}
 
 	@RequestMapping(value = "/register", method = GET)
 	public String showRegistrationForm(Model model) {
 		model.addAttribute(new Employee());
-		model.addAttribute("departmentsList", departmentRepository.findDepartments());
+		model.addAttribute("departmentsList", departmentManger.findDepartments());
 		return "registerForm";
 	}
 
@@ -44,20 +44,20 @@ public class EmployeeController {
 			return "registerForm";
 		}
 
-		employeeRepository.addEmployee(employee);
+		employeeManger.addEmployee(employee);
 		return "redirect:/employees";
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String processDelete(@RequestParam long id) {
-		employeeRepository.deleteEmployee(id);
+		employeeManger.deleteEmployee(id);
 		return "redirect:/employees";
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String processEdit(@RequestParam long id, Model model) {
-		model.addAttribute(employeeRepository.findById(id));
-		model.addAttribute("departmentsList", departmentRepository.findDepartments());
+	public String processEdit(@RequestParam int id, Model model) {
+		model.addAttribute(employeeManger.findEmployeeById(id));
+		model.addAttribute("departmentsList", departmentManger.findDepartments());
 		return "registerForm";
 	}
 
@@ -66,7 +66,7 @@ public class EmployeeController {
 		if (errors.hasErrors()) {
 			return "registerForm";
 		}
-		employeeRepository.updateEmployee(employee);
+		employeeManger.updateEmployee(employee);
 		return "redirect:/employees";
 	}
 

@@ -13,5 +13,5 @@ public interface EmployeeManger {
 
 	public void updateEmployee(Employee employee);
 
-	public void deleteEmployee(long id);
+	public void deleteEmployee(int id);
 }

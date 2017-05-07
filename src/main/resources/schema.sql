@@ -11,9 +11,9 @@ create table Employee(
 	id identity,
 	name varchar(255) unique not null ,
 	jobTitle varchar(255) not null,
-	department int not null,
+	departmentId int not null,
 	email varchar(255) unique not null,
 	dataofBirth date not null,
 	salary long not null,
-	FOREIGN KEY (department) REFERENCES  Department(departmentId )
+	FOREIGN KEY (departmentId) REFERENCES  Department(departmentId )
 );

@@ -4,6 +4,15 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -11,29 +20,41 @@ import javax.validation.constraints.Size;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
+
+@Entity
+@Table(name = "Employee")
 
 public class Employee {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	@NotNull
 	@Size(min = 2, max = 20, message = "{name.size}")
+	@Column(name = "name")
 	private String name;
+	@Transient
 	private int age;
+	@Column(name = "salary")
 	private long salary;
 	@NotNull
 	@Size(min = 4, max = 20, message = "{jobTitle.size}")
+	@Column(name = "jobTitle")
 	private String jobTitle;
 	@NotNull
 	@Past(message = "{dataofBirth.date}")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "dataofBirth")
 	private Date dataofBirth;
+	@ManyToOne
+	@JoinColumn(name = "departmentId")
 	private Department department;
 	@NotNull
 	@Email(message = "{email.valid}")
+	@Column(name = "email")
 	private String email;
+	@Transient
 	private long departmentId;
 
 	public Employee() {

@@ -28,7 +28,6 @@ $(document).ready(function() {
 			},
 			dataofBirth : {
 				required : true,
-				dateFormat : true
 			},
 			salary : {
 				required : true,

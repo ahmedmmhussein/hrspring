@@ -3,14 +3,14 @@ package hr.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import hr.beans.Employee;
 import hr.data.EmployeeRepository;
 
 @Component
+@Transactional
 public class EmployeeMangerImpl implements EmployeeManger {
 	@Autowired
 	EmployeeRepository employeeRepository;
@@ -44,7 +44,7 @@ public class EmployeeMangerImpl implements EmployeeManger {
 	}
 
 	//@Secured("ROLE_ADMIN")
-	public void deleteEmployee(long id) {
+	public void deleteEmployee(int id) {
 		employeeRepository.deleteEmployee(id);
 	}
 }

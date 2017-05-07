@@ -8,12 +8,12 @@ public interface EmployeeRepository {
 
 	List<Employee> findEmployees();
 
-	Employee findById(long id);
+	Employee findById(int id);
 
 	void addEmployee(Employee employee);
 
 	void updateEmployee(Employee employee);
 
-	void deleteEmployee(long id);
+	void deleteEmployee(int id);
 
 }

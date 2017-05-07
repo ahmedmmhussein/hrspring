@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import hr.beans.Department;
 import hr.data.DepartmentRepository;
 
 @Component
+@Transactional
 public class DepartmentMangerImpl implements DepartmentManger {
 	@Autowired
 	DepartmentRepository departmentRepository;

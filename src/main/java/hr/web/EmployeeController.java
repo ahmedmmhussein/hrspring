@@ -49,7 +49,7 @@ public class EmployeeController {
 	}
 
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String processDelete(@RequestParam long id) {
+	public String processDelete(@RequestParam int id) {
 		employeeManger.deleteEmployee(id);
 		return "redirect:/employees";
 	}

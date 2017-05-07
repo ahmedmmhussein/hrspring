@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 import hr.beans.Department;
 import hr.beans.Employee;
 
-@Repository
+//@Repository
 public class JdbcEmployeeRepository implements EmployeeRepository {
 	private JdbcOperations jdbc;
 
@@ -32,7 +32,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 
 	/* @PreAuthorize("isAuthenticated()") */
 	@Override
-	public Employee findById(long id) {
+	public Employee findById(int id) {
 		Employee employee = null;
 		try {
 			employee = jdbc.queryForObject(
@@ -66,7 +66,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 
 	/* @Secured("ROLE_ADMIN") */
 	@Override
-	public void deleteEmployee(long id) {
+	public void deleteEmployee(int id) {
 		jdbc.update("DELETE FROM Employee WHERE id=?", id);
 	}
 

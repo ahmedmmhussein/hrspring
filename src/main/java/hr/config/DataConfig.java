@@ -12,7 +12,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 @Configuration
 public class DataConfig {
 
-  @Bean
+/*  @Bean
   public DataSource dataSource() {
     return new EmbeddedDatabaseBuilder()
             .setType(EmbeddedDatabaseType.H2)
@@ -23,6 +23,6 @@ public class DataConfig {
   @Bean
   public JdbcOperations jdbcTemplate(DataSource dataSource) {
     return new JdbcTemplate(dataSource);
-  }
+  }*/
 
 }

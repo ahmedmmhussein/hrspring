@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import hr.beans.Department;
 
-@Repository
+//@Repository
 public class JdbcDepartmentRepository implements DepartmentRepository {
 
 	private JdbcOperations jdbc;

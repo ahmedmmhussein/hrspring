@@ -14,59 +14,26 @@ $(function() {
 	}).val();
 });
 
-$(document)
-		.ready(
-				function() {
-					$(".employeeDetails")
-							.click(
-									function() {
-										$
-												.getJSON(
-														"http://localhost:8080/hrspring/rest/employees/"
-																+ $(this)
-																		.attr(
-																				"value"),
-														function(result) {
-															departmentName = result.department.departmentName;
-															$("#dialog")
-																	.html(
-																			'<table align="center" cellpadding="2">');
-															$
-																	.each(
-																			result,
-																			function(
-																					key,
-																					value) {
-																				if (key === 'department') {
-																					$(
-																							"#dialog")
-																							.append(
-																									'<tr><td>'
-																											+ key
-																											+ '</td><td>'
-																											+ departmentName
-																											+ '</td></tr>')
-																				} else {
-																					$(
-																							"#dialog")
-																							.append(
-																									'<tr><td>'
-																											+ key
-																											+ '</td><td>'
-																											+ value
-																											+ '</td></tr>')
-																				}
-																			});
-															$("#dialog")
-																	.append(
-																			'</table>')
-															$("#dialog")
-																	.dialog(
-																			"open");
-														});
-									});
-
+$(document).on(
+		'click',
+		'.employeeDetails',
+		function() {
+			$.getJSON("http://localhost:8080/hrspring/rest/employees/"
+					+ $(this).attr("value"), function(result) {
+				$.each(result, function(key, value) {
+					if (key === 'department') {
+						$("tddata").append(
+								'<tr><td>' + key + '</td><td>'
+										+ value.departmentName + '</td></tr>')
+					} else {
+						$("tddata").append(
+								'<tr><td>' + key + '</td><td>' + value
+										+ '</td></tr>')
+					}
 				});
+				$("#dialog").dialog("open");
+			});
+		});
 
 $(function() {
 	$("#dialog").dialog({
@@ -79,8 +46,7 @@ $(function() {
 
 	// From
 	// http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-	
-	
+
 	emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/, name = $("#name"), email = $("#email"), password = $("#password"), allFields = $(
 			[]).add(name).add(email).add(password), tips = $(".validateTips");
 
@@ -109,12 +75,11 @@ $(function() {
 
 	function addUser() {
 		var jsonText = JSON.stringify($('#myForm').serializeObject());
-		  id = $( "#id" );
-		  name = $( "#name" );
-		  salary = $( "#salary" );
-		  jobTitle = $( "#jobTitle" );
-		  department = $( "#department" );
-	      email = $( "#email" ); 
+		var name = $("#name").val();
+		var salary = $("#salary").val();
+		var jobTitle = $("#jobTitle").val();
+		var department = $("#department").val();
+		var email = $("#email").val();
 		$.ajax({
 			url : "http://localhost:8080/hrspring/rest/employees/add",
 			type : "POST",
@@ -122,16 +87,14 @@ $(function() {
 			contentType : "application/json; charset=utf-8",
 			success : function() {
 				dialog.dialog("close");
-				// location.reload();
-				$("tbody").append(
-						"<tr>"
-								+ "<td>"
-								+ 1 + "</td>" + "<td>"
-								+ name.val() + "</td>" + "<td>"
-								+ salary.val() + "</td>" + "<td>"
-								+ jobTitle.val() + "</td>" + "<td>"
-								+ department.val() + "</td>" + "<td>"
-								+ email.val() + "</td>" + "</tr>");
+				/*
+				 * // location.reload(); $("tbody").append( "<tr>" + "<td>" +
+				 * 1 + "</td>" + "<td>" + name + "</td>" + "<td>" +
+				 * salary + "</td>" + "<td>" + jobTitle + "</td>" + "<td>" +
+				 * department + "</td>" + "<td>" + email + "</td>" + "</tr>");
+				 */
+
+				$("#employeeDiv").load(location.href + " #employeeDiv");
 			}
 		});
 		return true;

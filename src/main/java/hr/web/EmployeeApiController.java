@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,8 +44,9 @@ public class EmployeeApiController {
 	}
 
 	@RequestMapping(value = "/add", method = POST, consumes = "application/json")
-	public void addEmployee(@RequestBody Employee employee) {
+	public void addEmployee(@RequestBody Employee employee, Model model) {
 		employeeRepository.addEmployee(employee);
+		model.addAttribute("employeeList", employeeRepository.findEmployees());
 	}
 
 	@ExceptionHandler(EmployeeNotFoundException.class)

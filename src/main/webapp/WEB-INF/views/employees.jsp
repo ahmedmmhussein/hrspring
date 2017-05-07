@@ -17,7 +17,7 @@
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet"
 	href="https://jqueryui.com/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<c:url value="/resources/ajax.js" />"></script>
 <title>Employees Page</title>
@@ -35,66 +35,73 @@
 				code="home.add.new" /></a></span>
 	<br />
 	<br />
-	<%-- </security:authorize> --%>
-	<c:choose>
-		<c:when test="${employeeList.size()==0}">
-			<span><s:message code="employees.no" /></span>
-		</c:when>
-		<c:otherwise>
-			<input type="text" id="myInput" onkeyup="myFunction()"
-				placeholder="Search for names..">
-			<table id="employeesTable" align="center" cellpadding="10">
-				<tr>
-					<th><s:message code="employees.id" /></th>
-					<th><s:message code="register.name" /></th>
-					<th><s:message code="register.salary" /></th>
-					<th><s:message code="register.title" /></th>
-					<th><s:message code="register.department" /></th>
-					<th><s:message code="register.email" /></th>
-					<th></th>
-				</tr>
-				 <tbody>
-				<c:forEach items="${employeeList}" var="employee">
+	<div id="employeeDiv">
+		<%-- </security:authorize> --%>
+		<c:choose>
+			<c:when test="${employeeList.size()==0}">
+				<span><s:message code="employees.no" /></span>
+			</c:when>
+			<c:otherwise>
+				<input type="text" id="myInput" onkeyup="myFunction()"
+					placeholder="Search for names..">
+				<table id="employeesTable" align="center" cellpadding="10">
 					<tr>
-						<td><c:out value="${employee.id}" /></td>
-						<td><a href="<c:url value="/employees/${employee.id}" />"><c:out
-									value="${employee.name}" /></a></td>
-						<td><fmt:setLocale value="${info.locale}" scope="session" />
-							<fmt:formatNumber value="${employee.salary}" type="currency" /></td>
-						<td><c:out value="${employee.jobTitle}" /></td>
-						<td><c:out value="${employee.department}" /></td>
-						<td><c:out value="${employee.email}" /></td>
-						<td>
-							<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
-							<form method="get" action="<c:url value="/employee/edit" />">
-								<input type="hidden" value="${employee.id}" name="id" /> <input
-									class="ui-button ui-widget ui-corner-all" type="submit"
-									value="Edit">
-							</form> <%-- </security:authorize> --%>
-						</td>
-						<td>
-							<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%> <c:if
-								test="${employee.salary==0}">
-								<form method="post" action="<c:url value="/employee/delete" />">
-									<input type="hidden" value="${employee.id}" name="id" /> <input
-										class="ui-button ui-widget ui-corner-all" type="submit"
-										value="Delete"
-										onclick="return confirm('Are you sure you want to delete this Employee?')">
-								</form>
-							</c:if> <%-- </security:authorize> --%>
-						</td>
-						<td><button class="ui-button ui-widget ui-corner-all employeeDetails" value="${employee.id}">view more</button></td>
+						<th><s:message code="employees.id" /></th>
+						<th><s:message code="register.name" /></th>
+						<th><s:message code="employees.age" /></th>
+						<th><s:message code="register.salary" /></th>
+						<th><s:message code="register.title" /></th>
+						<th><s:message code="register.department" /></th>
+						<th><s:message code="register.email" /></th>
+						<th></th>
 					</tr>
-				</c:forEach>
-				 <tbody>
-			</table>
-		</c:otherwise>
-	</c:choose>
+					<tbody>
+						<c:forEach items="${employeeList}" var="employee">
+							<tr>
+								<td><c:out value="${employee.id}" /></td>
+								<td><a href="<c:url value="/employees/${employee.id}" />"><c:out
+											value="${employee.name}" /></a></td>
+								<td><c:out value="${employee.age}" /></td>
+								<td><fmt:setLocale value="${info.locale}" scope="session" />
+									<fmt:formatNumber value="${employee.salary}" type="currency" /></td>
+								<td><c:out value="${employee.jobTitle}" /></td>
+								<td><c:out value="${employee.department}" /></td>
+								<td><c:out value="${employee.email}" /></td>
+								<td>
+									<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%>
+									<form method="get" action="<c:url value="/employee/edit" />">
+										<input type="hidden" value="${employee.id}" name="id" /> <input
+											class="ui-button ui-widget ui-corner-all" type="submit"
+											value="Edit">
+									</form> <%-- </security:authorize> --%>
+								</td>
+								<td>
+									<%-- <security:authorize access="hasRole('ROLE_ADMIN')"> --%> <c:if
+										test="${employee.salary==0}">
+										<form method="post"
+											action="<c:url value="/employee/delete" />">
+											<input type="hidden" value="${employee.id}" name="id" /> <input
+												class="ui-button ui-widget ui-corner-all" type="submit"
+												value="Delete"
+												onclick="return confirm('Are you sure you want to delete this Employee?')">
+										</form>
+									</c:if> <%-- </security:authorize> --%>
+								</td>
+								<td><button
+										class="ui-button ui-widget ui-corner-all employeeDetails"
+										value="${employee.id}">view more</button></td>
+							</tr>
+						</c:forEach>
+					<tbody>
+				</table>
+			</c:otherwise>
+		</c:choose>
+	</div>
 	<button id="create-user">Create new user</button>
 	<div id="dialog" title="Basic dialog">
-		<p>This is an animated dialog which is useful for displaying
-			information. The dialog window can be moved, resized and closed with
-			the 'x' icon.</p>
+		<table align="center" cellpadding="2">
+		<tddata></tddata>
+		</table>
 	</div>
 
 	<div id="dialog-form" title="Create new user">

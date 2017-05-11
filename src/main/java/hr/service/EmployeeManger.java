@@ -14,4 +14,6 @@ public interface EmployeeManger {
 	public void updateEmployee(Employee employee);
 
 	public void deleteEmployee(int id);
+
+	public int calculateVacation(Employee employee);
 }

@@ -76,7 +76,7 @@ public class JdbcEmployeeRepository implements EmployeeRepository {
 			department.setDepartmentId(rs.getInt("departmentId"));
 			department.setDepartmentName(rs.getString("departmentName"));
 			return new Employee(rs.getInt("id"), rs.getString("name"), rs.getString("email"), rs.getString("jobTitle"),
-					rs.getLong("salary"), department, rs.getDate("dataofBirth"));
+					rs.getLong("salary"), department, rs.getDate("dataofBirth"), rs.getDate("hireDate"));
 
 		}
 	}

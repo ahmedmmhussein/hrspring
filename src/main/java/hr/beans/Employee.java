@@ -2,6 +2,7 @@ package hr.beans;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -56,13 +57,16 @@ public class Employee {
 	private String email;
 	@Transient
 	private long departmentId;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "hireDate")
+	private Date hireDate;
 
 	public Employee() {
 		super();
 	}
 
 	public Employee(int id, String name2, String email2, String jobTitle2, Long salary2, Department department2,
-			Date dataofBirth) {
+			Date dataofBirth, Date hireDate) {
 		this.id = id;
 		name = name2;
 		email = email2;
@@ -71,8 +75,10 @@ public class Employee {
 		department = department2;
 		this.dataofBirth = dataofBirth;
 		LocalDate today = LocalDate.now();
-		Period p = Period.between(LocalDate.parse(dataofBirth.toString()), today);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss z yyyy");
+		Period p = Period.between(LocalDate.parse(dataofBirth.toString(), formatter), today);
 		age = p.getYears();
+		this.hireDate = hireDate;
 	}
 
 	public int getId() {
@@ -142,6 +148,14 @@ public class Employee {
 	public void setDepartmentId(long departmentId) {
 		this.department = new Department();
 		this.department.setDepartmentId(departmentId);
+	}
+
+	public Date getHireDate() {
+		return hireDate;
+	}
+
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
 	}
 
 	@Override
